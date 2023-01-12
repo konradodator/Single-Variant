@@ -393,7 +393,7 @@ void display() {
     x = bt.x;
     y = bt.y;
     z = bt.z;
-    cout << bt.x << "," << bt.y << "," << bt.z << endl;
+   std:: cout << bt.x << "," << bt.y << "," << bt.z << endl;
     glTranslatef(x, y, z);
     glRotatef(angle, 0, 0, 1);
     glColor3f(0.0, 1.0, 0.0);
