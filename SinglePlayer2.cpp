@@ -277,26 +277,28 @@ void display() {
 
 
     //glLoadIdentity();
-    if (counts == 0)
-    {
+       if (counts == 0)
+    
         bt = bezierPointspanitik(ct, ctrlpoints1);
+
+    
+
+
+
+    if (counts == 1)
+    {
+        bt = bezierPointspanitik(ct, ctrlpoints2);
         if (ct > 0)
             angle -= 0.7;
 
         if (speed > 0.025)
         {
-            bt.x = bt.x + 5;
-            bt.y = bt.y - 5;
+            bt.x = bt.x + 10;
+           // bt.y = bt.y - 5;
             start = false;
 
         }
     }
-
-
-
-    if (counts == 1)
-        bt = bezierPointspanitik(ct, ctrlpoints2);
-
 
     if (counts == 2)
     {
@@ -304,8 +306,8 @@ void display() {
 
         if (speed > 0.025)
         {
-            bt.x = bt.x - 12;
-            //bt.y = bt.y + 5;
+           // bt.x = bt.x - 12;
+            bt.y = bt.y - 10;
             start = false;
         }
 
@@ -314,47 +316,56 @@ void display() {
 
 
     if (counts == 3)
-    {
+    
         bt = bezierPointspanitik(ct, ctrlpoints4);
 
-        if (speed > 0.025)
-        {
-            //bt.x = bt.x - 12;
-            bt.y = bt.y + 5;
-            start = false;
-        }
-
-    }
 
     if (counts == 4)
         bt = bezierPointspanitik(ct, ctrlpoints5);
 
     if (counts == 5)
-    {
+    
         bt = bezierPointspanitik(ct, ctrlpoints6);
-        if (speed > 0.025)
-        {
-            bt.x = bt.x + 12;
-            //bt.y = bt.y + 5;
-            start = false;
-
-        }
-    }
 
     if (counts == 6)
         bt = bezierPointspanitik(ct, ctrlpoints7);
 
     if (counts == 7)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints8);
+        if (speed > 0.030)
+        {
+            bt.x = bt.x - 10;
+            //bt.y = bt.y - 10;
+            start = false;
+        }
+    }
+  
 
     if (counts == 8)
         bt = bezierPointspanitik(ct, ctrlpoints9);
 
     if (counts == 9)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints10);
+        if (speed > 0.025)
+        {
+            bt.x = bt.x - 10;
+            bt.y = bt.y - 10;
+            start = false;
+        }
+    }
 
     if (counts == 10)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints11);
+        if (speed > 0.025)
+        {
+           // bt.x = bt.x - 10;
+            bt.y = bt.y - 10;
+            start = false;
+        }
+    }
 
     if (counts == 11)
         bt = bezierPointspanitik(ct, ctrlpoints12);
@@ -366,7 +377,15 @@ void display() {
         bt = bezierPointspanitik(ct, ctrlpoints14);
 
     if (counts == 14)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints15);
+        if (speed > 0.025)
+        {
+            // bt.x = bt.x - 10;
+            bt.y = bt.y + 10;
+            start = false;
+        }
+    }
 
 
 
