@@ -15,7 +15,6 @@ using namespace std;
 int i;
 int refreshMills = 10;
 int pointsNumber;
-float angle;
 float ct = 0;
 float ct2 = 0;
 float ct3 = 0;
@@ -112,8 +111,11 @@ for (int i = 0; i < pointsNumber; i++) {
 }
 return points;
 }*/
+bool rota = false; 
 bool start = false;
 float speed = 0;
+float angle = 0;
+float anglespeed;
 
 void SpecialKeyFunc(int Key, int x, int y)
 {
@@ -121,8 +123,10 @@ void SpecialKeyFunc(int Key, int x, int y)
     case GLUT_KEY_UP:
 
         // ct += 0.02;
+        rota = true;
         start = true;
         speed += 0.001;
+        anglespeed += 0.09;
         glutPostRedisplay();
 
         break;
@@ -142,8 +146,10 @@ void SpecialKeyFunc(int Key, int x, int y)
 
         speed = 0;
         ct = 0;
-        start = false;
-
+        //start = false;
+        
+        
+       
         glutPostRedisplay();
 
         break;
@@ -316,7 +322,7 @@ void display() {
 
 
 //Konrad Matusewicz///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
 
     if (start)
     {
@@ -335,13 +341,19 @@ void display() {
     if (counts > 5)
         counts = 0;
 
+    if (rota)
+    {
+        if (ct < 1)
+            angle -= 0.18 + anglespeed;
+    }
+
 
     //glLoadIdentity();
     if (counts == 0)
     {
         bt = bezierPointspanitik(ct, ctrlpoints9);
-        if (ct > 0)
-            angle -= 0.7;
+        
+        //rota = true;
 
         if (speed > 0.025)
         {
@@ -355,13 +367,16 @@ void display() {
 
 
     if (counts == 1)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints10);
+        rota = false;
+    }
 
 
     if (counts == 2)
     {
         bt = bezierPointspanitik(ct, ctrlpoints11);
-
+        rota = true;
         if (speed > 0.025)
         {
             bt.x = bt.x - 12;
@@ -376,7 +391,7 @@ void display() {
     if (counts == 3)
     {
         bt = bezierPointspanitik(ct, ctrlpoints12);
-   
+        rota = true;
         if (speed > 0.025)
         {
             //bt.x = bt.x - 12;
@@ -387,21 +402,25 @@ void display() {
     }
 
     if (counts == 4)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints121);
+        rota = false;
+    }
 
     if (counts == 5)
     {
         bt = bezierPointspanitik(ct, ctrlpoints122);
+        rota = true;
         if (speed > 0.025)
         {
             bt.x = bt.x + 12;
             //bt.y = bt.y + 5;
             start = false;
-           
+
         }
     }
 
-   
+
 
 
     x = bt.x;
@@ -416,10 +435,10 @@ void display() {
     //Auto
     glBegin(GL_QUADS);
     //Rumpf
-    glVertex2f(-1.5,  -2);
+    glVertex2f(-1.5, -2);
     glVertex2f(-1.5, 2.3);
-    glVertex2f( 1.5, 2.3);
-    glVertex2f( 1.5,  -2);
+    glVertex2f(1.5, 2.3);
+    glVertex2f(1.5, -2);
     //Rad 1
     glVertex2f(-2.5, -2);
     glVertex2f(-2.5, -1);
@@ -444,8 +463,8 @@ void display() {
     //Spitze
     glBegin(GL_TRIANGLES);
     glVertex2f(-1.5, -2);
-    glVertex2f(0,  -3.5);
-    glVertex2f(1.5,  -2);
+    glVertex2f(0, -3.5);
+    glVertex2f(1.5, -2);
     glEnd();
     //glutSolidSphere(2, 20, 10);
 
@@ -619,6 +638,10 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
+
+
 
 
 
