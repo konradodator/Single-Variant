@@ -134,10 +134,15 @@ void SpecialKeyFunc(int Key, int x, int y)
 
         // ct += 0.02;
         if (speed >= 0)
+        {
             speed -= 0.001;
-
+            anglespeed -= 0.09;
+        }
         if (speed < 0.0001)
+        {
             start = false;
+            rota = false;
+        }
 
         glutPostRedisplay();
 
