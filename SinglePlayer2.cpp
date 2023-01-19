@@ -91,10 +91,16 @@ for (int i = 0; i < pointsNumber; i++) {
 }
 return points;
 }*/
+
 bool rota = false;
+bool RotaPlus45 = false;
+bool RotaPlus90 = false;
+bool RotaMinus45 = false;
 bool start = false;
 float speed = 0;
 float anglespeed;
+float anglespeed2;
+float angle2;
 
 
 
@@ -104,10 +110,12 @@ void SpecialKeyFunc(int Key, int x, int y)
     case GLUT_KEY_UP:
 
         // ct += 0.02;
-        rota = true;
+     
         start = true;
         speed += 0.001;
         anglespeed += 0.09;
+        anglespeed2 += 0.045;
+      
         glutPostRedisplay();
 
         break;
@@ -117,13 +125,17 @@ void SpecialKeyFunc(int Key, int x, int y)
         if (speed >= 0)
         {
             speed -= 0.001;
-            anglespeed -= 0.09;
+            anglespeed  -= 0.09;
+            anglespeed2 -= 0.045;
             
         }
         if (speed < 0.0001)
         {
             start = false;
             rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
         }
 
         glutPostRedisplay();
@@ -135,11 +147,32 @@ void SpecialKeyFunc(int Key, int x, int y)
         ct = 0;
         start = false;
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
         anglespeed = 0;
+        anglespeed2 = 0;
 
         if (counts == 0)
             angle = -270;
 
+        if (counts == 1)
+            angle = -270;
+
+        if (counts == 2)
+            angle = 0;
+
+        if (counts == 7)
+            angle = -90;
+
+        if (counts == 9)
+            angle = -45;
+
+        if (counts == 10)
+            angle = 45;
+
+        if (counts == 14)
+            angle = 135;
     
 
         glutPostRedisplay();
@@ -300,12 +333,32 @@ void display() {
             angle -= 0.18 + anglespeed;
     }
 
+    if (RotaPlus45)
+    {
+        if (ct < 1)
+            angle += 0.09 + anglespeed2;
+    }
+
+    if (RotaMinus45)
+    {
+        if (ct < 1)
+            angle -= 0.09 + anglespeed2;
+    }
+
+    if (RotaPlus90)
+    {
+        if (ct < 1)
+            angle += 0.18 + anglespeed;
+    }
 
     //glLoadIdentity();
     if (counts == 0)
     {
         bt = bezierPointspanitik(ct, ctrlpoints1);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
 
 
@@ -315,6 +368,17 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints2);
         rota = true;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
+
+        if (speed < 0.00009)
+        {
+            rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+        }
 
         if (speed > 0.025)
         {
@@ -329,6 +393,17 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints3);
         rota = true;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
+
+        if (speed < 0.00009)
+        {
+            rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+        }
         if (speed > 0.025)
         {
             // bt.x = bt.x - 12;
@@ -344,33 +419,54 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints4);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
 
     if (counts == 4)
     {
         bt = bezierPointspanitik(ct, ctrlpoints5);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
     if (counts == 5)
     {
         bt = bezierPointspanitik(ct, ctrlpoints6);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
     if (counts == 6)
     {
         bt = bezierPointspanitik(ct, ctrlpoints7);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
 
     if (counts == 7)
     {
         bt = bezierPointspanitik(ct, ctrlpoints8);
         
-        angle = -90;
+       
         
-            rota = true;
-            anglespeed += 0.045;
-            angle += 0.09 + anglespeed;
+            rota = false;
+            RotaPlus45 = true;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+
+            if (speed < 0.00009)
+            {
+                rota = false;
+                RotaPlus45 = false;
+                RotaPlus90 = false;
+                RotaMinus45 = false;
+            }
         
         if (speed > 0.030)
         {
@@ -385,10 +481,25 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints9);
         rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
     }
     if (counts == 9)
     {
         bt = bezierPointspanitik(ct, ctrlpoints10);
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = true;
+        RotaMinus45 = false;
+
+        if (speed < 0.00009)
+        {
+            rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+        }
         if (speed > 0.025)
         {
             bt.x = bt.x - 10;
@@ -400,6 +511,18 @@ void display() {
     if (counts == 10)
     {
         bt = bezierPointspanitik(ct, ctrlpoints11);
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = true;
+        RotaMinus45 = false;
+
+        if (speed < 0.00009)
+        {
+            rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+        }
         if (speed > 0.025)
         {
             // bt.x = bt.x - 10;
@@ -409,17 +532,44 @@ void display() {
     }
 
     if (counts == 11)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints12);
-
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
+    }
     if (counts == 12)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints13);
-
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
+    }
     if (counts == 13)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints14);
-
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = false;
+    }
     if (counts == 14)
     {
         bt = bezierPointspanitik(ct, ctrlpoints15);
+        rota = false;
+        RotaPlus45 = false;
+        RotaPlus90 = false;
+        RotaMinus45 = true;
+
+        if (speed < 0.00009)
+        {
+            rota = false;
+            RotaPlus45 = false;
+            RotaPlus90 = false;
+            RotaMinus45 = false;
+        }
         if (speed > 0.025)
         {
             // bt.x = bt.x - 10;
@@ -646,6 +796,8 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
 
 
 
