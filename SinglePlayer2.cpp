@@ -15,7 +15,7 @@ using namespace std;
 int i;
 int refreshMills = 10;
 int pointsNumber;
-float angle;
+float angle = -270;
 float ct = 0;
 float ct2 = 0;
 float ct3 = 0;
@@ -91,8 +91,12 @@ for (int i = 0; i < pointsNumber; i++) {
 }
 return points;
 }*/
+bool rota = false;
 bool start = false;
 float speed = 0;
+float anglespeed;
+
+
 
 void SpecialKeyFunc(int Key, int x, int y)
 {
@@ -100,8 +104,10 @@ void SpecialKeyFunc(int Key, int x, int y)
     case GLUT_KEY_UP:
 
         // ct += 0.02;
+        rota = true;
         start = true;
         speed += 0.001;
+        anglespeed += 0.09;
         glutPostRedisplay();
 
         break;
@@ -109,10 +115,16 @@ void SpecialKeyFunc(int Key, int x, int y)
 
         // ct += 0.02;
         if (speed >= 0)
+        {
             speed -= 0.001;
-
+            anglespeed -= 0.09;
+            
+        }
         if (speed < 0.0001)
+        {
             start = false;
+            rota = false;
+        }
 
         glutPostRedisplay();
 
@@ -122,6 +134,13 @@ void SpecialKeyFunc(int Key, int x, int y)
         speed = 0;
         ct = 0;
         start = false;
+        rota = false;
+        anglespeed = 0;
+
+        if (counts == 0)
+            angle = -270;
+
+    
 
         glutPostRedisplay();
 
@@ -275,26 +294,32 @@ void display() {
     if (counts > 14)
         counts = 0;
 
+    if (rota)
+    {
+        if (ct < 1)
+            angle -= 0.18 + anglespeed;
+    }
+
 
     //glLoadIdentity();
-       if (counts == 0)
-    
+    if (counts == 0)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints1);
+        rota = false;
+    }
 
-    
 
 
 
     if (counts == 1)
     {
         bt = bezierPointspanitik(ct, ctrlpoints2);
-        if (ct > 0)
-            angle -= 0.7;
+        rota = true;
 
         if (speed > 0.025)
         {
             bt.x = bt.x + 10;
-           // bt.y = bt.y - 5;
+            // bt.y = bt.y - 5;
             start = false;
 
         }
@@ -303,10 +328,10 @@ void display() {
     if (counts == 2)
     {
         bt = bezierPointspanitik(ct, ctrlpoints3);
-
+        rota = true;
         if (speed > 0.025)
         {
-           // bt.x = bt.x - 12;
+            // bt.x = bt.x - 12;
             bt.y = bt.y - 10;
             start = false;
         }
@@ -316,23 +341,37 @@ void display() {
 
 
     if (counts == 3)
-    
+    {
         bt = bezierPointspanitik(ct, ctrlpoints4);
-
+        rota = false;
+    }
 
     if (counts == 4)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints5);
-
+        rota = false;
+    }
     if (counts == 5)
-    
+    {
         bt = bezierPointspanitik(ct, ctrlpoints6);
-
+        rota = false;
+    }
     if (counts == 6)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints7);
+        rota = false;
+    }
 
     if (counts == 7)
     {
         bt = bezierPointspanitik(ct, ctrlpoints8);
+        
+        angle = -90;
+        
+            rota = true;
+            anglespeed += 0.045;
+            angle += 0.09 + anglespeed;
+        
         if (speed > 0.030)
         {
             bt.x = bt.x - 10;
@@ -340,11 +379,13 @@ void display() {
             start = false;
         }
     }
-  
+
 
     if (counts == 8)
+    {
         bt = bezierPointspanitik(ct, ctrlpoints9);
-
+        rota = false;
+    }
     if (counts == 9)
     {
         bt = bezierPointspanitik(ct, ctrlpoints10);
@@ -361,7 +402,7 @@ void display() {
         bt = bezierPointspanitik(ct, ctrlpoints11);
         if (speed > 0.025)
         {
-           // bt.x = bt.x - 10;
+            // bt.x = bt.x - 10;
             bt.y = bt.y - 10;
             start = false;
         }
@@ -393,7 +434,7 @@ void display() {
     x = bt.x;
     y = bt.y;
     z = bt.z;
-   std:: cout << bt.x << "," << bt.y << "," << bt.z << endl;
+    std::cout << bt.x << "," << bt.y << "," << bt.z << endl;
     glTranslatef(x, y, z);
     glRotatef(angle, 0, 0, 1);
     glColor3f(0.0, 1.0, 0.0);
@@ -605,6 +646,9 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
+
 
 
 
