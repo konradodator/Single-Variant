@@ -351,7 +351,10 @@ void display() {
     }
 
     if (counts > 5)
+    {
         counts = 0;
+        angle = 0;
+    }
 
     if (rota)
     {
