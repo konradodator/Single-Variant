@@ -1,4 +1,4 @@
-//Konrad Matusewicz//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //#include <GL/glew.h>
 #include <GL/glut.h>
 #include <stdlib.h>
@@ -111,7 +111,7 @@ for (int i = 0; i < pointsNumber; i++) {
 }
 return points;
 }*/
-bool rota = false; 
+bool rota = false;
 bool start = false;
 float speed = 0;
 float angle = 0;
@@ -146,10 +146,22 @@ void SpecialKeyFunc(int Key, int x, int y)
 
         speed = 0;
         ct = 0;
-        //start = false;
-        
-        
-       
+        start = false;
+        rota = false;
+        anglespeed = 0;
+
+        if (counts == 0)
+            angle = 0;
+
+        if (counts == 2)
+            angle = -90;
+
+        if (counts == 3)
+            angle = -180;
+
+        if (counts == 5)
+            angle = -270;
+
         glutPostRedisplay();
 
         break;
@@ -159,7 +171,7 @@ void SpecialKeyFunc(int Key, int x, int y)
 
 }
 
-//Konrad Matusewicz + Steven Klocke ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void display() {
     glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -321,7 +333,7 @@ void display() {
     //glFlush();
 
 
-//Konrad Matusewicz///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     if (start)
@@ -352,7 +364,7 @@ void display() {
     if (counts == 0)
     {
         bt = bezierPointspanitik(ct, ctrlpoints9);
-        
+
         //rota = true;
 
         if (speed > 0.025)
@@ -376,7 +388,13 @@ void display() {
     if (counts == 2)
     {
         bt = bezierPointspanitik(ct, ctrlpoints11);
+       
         rota = true;
+        if (speed == 0)
+        {
+            rota = false;
+        }
+
         if (speed > 0.025)
         {
             bt.x = bt.x - 12;
@@ -392,6 +410,12 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints12);
         rota = true;
+
+        if (speed == 0)
+        {
+            rota = false;
+        }
+
         if (speed > 0.025)
         {
             //bt.x = bt.x - 12;
@@ -411,6 +435,12 @@ void display() {
     {
         bt = bezierPointspanitik(ct, ctrlpoints122);
         rota = true;
+
+        if (speed == 0)
+        {
+            rota = false;
+        }
+
         if (speed > 0.025)
         {
             bt.x = bt.x + 12;
@@ -638,6 +668,12 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
+
+
+
+
 
 
 
