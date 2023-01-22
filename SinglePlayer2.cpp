@@ -41,7 +41,25 @@ void initGL() {
     glShadeModel(GL_SMOOTH);
 }
 
+void draw(GLfloat ctrlpoints[4][3])
+{
+    glShadeModel(GL_FLAT);
+    glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4,
+        &ctrlpoints[0][0]);
 
+    glEnable(GL_MAP1_VERTEX_3);
+
+    // Fill the color
+    glColor3f(1.0, 1.0, 1.0);
+    glBegin(GL_LINE_STRIP);
+
+
+    // Find the coordinates
+    for (i = 0; i <= 30; i++)
+        glEvalCoord1f((GLfloat)i / 30.0);
+
+    glEnd();
+}
 
 
 void drawHaupt(GLfloat ctrlpoints[4][3])
@@ -54,7 +72,7 @@ void drawHaupt(GLfloat ctrlpoints[4][3])
     glEnable(GL_MAP1_VERTEX_3);
 
     // Fill the color
-    glColor3f(0, 1.0, 0);
+    glColor3f(0, 0.5, 0);
     glBegin(GL_LINE_STRIP);
 
 
@@ -303,6 +321,42 @@ void display() {
             { 95, 75, 0.0 } };
     drawHaupt(ctrlpoints15);
 
+    //Außenlinie
+
+    GLfloat ctrlpoints16[4][3]
+        = { { 105, 85, 0.0 },
+            { 120, 85, 0.0 },
+            { 130, 80, 0.0 },
+            { 130, 65, 0.0 } };
+    draw(ctrlpoints16);
+
+    GLfloat ctrlpoints17[4][3]
+        = { { 130, 65, 0.0 },
+            { 130, 50, 0.0 },
+            { 120, 45, 0.0 },
+            { 105, 45, 0.0 } };
+    draw(ctrlpoints17);
+
+    GLfloat ctrlpoints18[4][3]
+        = { { 105, 45, 0.0 },
+            {  90, 45, 0.0 },
+            {  80, 45, 0.0 },
+            {  70, 35, 0.0 } };
+    draw(ctrlpoints18);
+
+    GLfloat ctrlpoints19[4][3]
+        = { {  70, 35, 0.0 },
+            {  50, 15, 0.0 },
+            {  40,  5, 0.0 },
+            {  30,  5, 0.0 } };
+    draw(ctrlpoints19);
+
+    GLfloat ctrlpoints20[4][3]
+        = { {  30,  5, 0.0 },
+            {  15,  5, 0.0 },
+            {  10, 10, 0.0 },
+            {   5, 15, 0.0 } };
+    draw(ctrlpoints20);
 
     //glFlush();
 
@@ -587,7 +641,7 @@ void display() {
     std::cout << bt.x << "," << bt.y << "," << bt.z << endl;
     glTranslatef(x, y, z);
     glRotatef(angle, 0, 0, 1);
-    glColor3f(0.0, 1.0, 0.0);
+    glColor3f(0.5, 0.0, 0.0);
 
 
     //Auto
@@ -598,27 +652,32 @@ void display() {
     glVertex2f(1.5, 2.3);
     glVertex2f(1.5, -2);
     //Rad 1
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(-2.5, -2);
     glVertex2f(-2.5, -1);
     glVertex2f(-1.5, -1);
     glVertex2f(-1.5, -2);
     //Rad2
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(-2.5, 1);
     glVertex2f(-2.5, 2);
     glVertex2f(-1.5, 2);
     glVertex2f(-1.5, 1);
     //Rad3
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(1.5, 1);
     glVertex2f(1.5, 2);
     glVertex2f(2.5, 2);
     glVertex2f(2.5, 1);
     //Rad4
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(1.5, -2);
     glVertex2f(1.5, -1);
     glVertex2f(2.5, -1);
     glVertex2f(2.5, -2);
     glEnd();
     //Spitze
+    glColor3f(0.5, 0.0, 0.0);
     glBegin(GL_TRIANGLES);
     glVertex2f(-1.5, -2);
     glVertex2f(0, -3.5);
@@ -796,7 +855,6 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
 
 
 
