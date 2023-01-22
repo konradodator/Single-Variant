@@ -354,9 +354,37 @@ void display() {
     GLfloat ctrlpoints20[4][3]
         = { {  30,  5, 0.0 },
             {  15,  5, 0.0 },
-            {  10, 10, 0.0 },
-            {   5, 15, 0.0 } };
+            {  5,  15, 0.0 },
+            {   5, 25, 0.0 } };
     draw(ctrlpoints20);
+
+    GLfloat ctrlpoints21[4][3]
+        = { {   5, 25, 0.0 },
+            {   5, 40, 0.0 },
+            {  15, 50, 0.0 },
+            {  25, 60, 0.0 } };
+    draw(ctrlpoints21);
+
+    GLfloat ctrlpoints22[4][3]
+        = { {  25, 60, 0.0 },
+            {  30, 65, 0.0 },
+            {  40, 65, 0.0 },
+            {  50, 65, 0.0 } };
+    draw(ctrlpoints22);
+
+    GLfloat ctrlpoints23[4][3]
+        = { {  50, 65, 0.0 },
+            {  60, 65, 0.0 },
+            {  70, 75, 0.0 },
+            {  75, 80, 0.0 } };
+    draw(ctrlpoints23);
+
+    GLfloat ctrlpoints24[4][3]
+        = { {  75, 80, 0.0 },
+            {  80, 85, 0.0 },
+            {  90, 85, 0.0 },
+            { 105, 85, 0.0 } };
+    draw(ctrlpoints24);
 
     //glFlush();
 
@@ -855,6 +883,9 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
+
 
 
 
