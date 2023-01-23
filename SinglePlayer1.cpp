@@ -464,10 +464,10 @@ void display() {
     x = bt.x;
     y = bt.y;
     z = bt.z;
-    cout << bt.x << "," << bt.y << "," << bt.z << endl;
+    std::cout << bt.x << "," << bt.y << "," << bt.z << endl;
     glTranslatef(x, y, z);
     glRotatef(angle, 0, 0, 1);
-    glColor3f(0.0, 1.0, 0.0);
+    glColor3f(0.5, 0.0, 0.0);
 
 
     //Auto
@@ -478,27 +478,32 @@ void display() {
     glVertex2f(1.5, 2.3);
     glVertex2f(1.5, -2);
     //Rad 1
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(-2.5, -2);
     glVertex2f(-2.5, -1);
     glVertex2f(-1.5, -1);
     glVertex2f(-1.5, -2);
     //Rad2
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(-2.5, 1);
     glVertex2f(-2.5, 2);
     glVertex2f(-1.5, 2);
     glVertex2f(-1.5, 1);
     //Rad3
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(1.5, 1);
     glVertex2f(1.5, 2);
     glVertex2f(2.5, 2);
     glVertex2f(2.5, 1);
     //Rad4
+    glColor3f(0.5, 0.5, 0.5);
     glVertex2f(1.5, -2);
     glVertex2f(1.5, -1);
     glVertex2f(2.5, -1);
     glVertex2f(2.5, -2);
     glEnd();
     //Spitze
+    glColor3f(0.5, 0.0, 0.0);
     glBegin(GL_TRIANGLES);
     glVertex2f(-1.5, -2);
     glVertex2f(0, -3.5);
