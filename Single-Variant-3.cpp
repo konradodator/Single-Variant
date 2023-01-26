@@ -340,7 +340,7 @@ void display() {
 
 
 
-    //Auﬂenlinie
+    //Au√üenlinie
 
     GLfloat ctrlpoints16[4][3]
         = { { 35, 75, 0.0 },
